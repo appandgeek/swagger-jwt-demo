@@ -25,11 +25,11 @@ public class SwaggerConfig {
     @Bean
     public Docket api() { 
     	Docket docket = new Docket(DocumentationType.SWAGGER_2)
-    			 .apiInfo(ApiInfo.DEFAULT)
-    			 .forCodeGeneration(true)
-				 .securityContexts(Lists.newArrayList(securityContext()))
-				 .securitySchemes(Lists.newArrayList(apiKey()))
-				 .useDefaultResponseMessages(false);
+    			  .apiInfo(ApiInfo.DEFAULT)
+    			  .forCodeGeneration(true)
+				  .securityContexts(Lists.newArrayList(securityContext()))
+				  .securitySchemes(Lists.newArrayList(apiKey()))
+				  .useDefaultResponseMessages(false);
 
 		docket = docket.select()                                  
    	                   .apis(RequestHandlerSelectors.any())                  
@@ -42,11 +42,10 @@ public class SwaggerConfig {
     
     private SecurityContext securityContext() {
 		return SecurityContext.builder().securityReferences(defaultAuth())
-				.forPaths(
-						Predicates.and
-		      			(Predicates.not(PathSelectors.regex("/error.*")), 
-		      					Predicates.not(PathSelectors.regex("/auth.*"))))
-				 .build();
+				.forPaths(Predicates.and(
+						  Predicates.not(PathSelectors.regex("/error.*")), 
+						  Predicates.not(PathSelectors.regex("/auth.*"))))
+				.build();
 	}
     
     private ApiKey apiKey() {
